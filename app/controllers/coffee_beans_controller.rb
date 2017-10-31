@@ -1,12 +1,12 @@
 class CoffeeBeansController < ApplicationController
   def index
-    coffee_beans = CoffeeBean.all
+    @coffee_beans = CoffeeBean.all
 
     render("coffee_beans_templates/index.html.erb")
   end
 
   def show
-    @coffee_bean = CoffeeBean.find(params[id])
+    @coffee_bean = CoffeeBean.find(params[:id])
 
     render("coffee_beans_templates/show.html.erb")
   end
@@ -29,6 +29,7 @@ class CoffeeBeansController < ApplicationController
   end
 
   def edit_form
+    @coffee_bean = CoffeeBean.find(params[:id])
     render("coffee_beans_templates/edit_form.html.erb")
   end
 
@@ -49,5 +50,6 @@ class CoffeeBeansController < ApplicationController
     @coffee_bean = CoffeeBean.find(params[:id])
 
     @coffee_bean.destroy
+    redirect_to("/coffee_beans")
   end
 end
